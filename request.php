@@ -8,8 +8,11 @@ class Request
         {
             // TODO clean request input
             $key = strtolower($key);
-            $this->$key = $val;
+            //echo $key. "<br>";
+            $this->$key = strtolower($val);
+            //echo $this->$key."<br>";
         }
+        //echo $this->{"request_uri"};
     }
 
 }
