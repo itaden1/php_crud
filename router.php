@@ -23,11 +23,10 @@ class Router
         }
         else
         {
-            $controller = new $this->{$this->request->request_method}[$this->request->request_uri]($request);
-            //$controller = new $controllerClass($request);
+            $method = $this->request->request_method;
+            $uri = $this->request->request_uri;
+            $controller = $this->{$method}[$uri];//($this->request);
             $controller->do_something();
-            //echo call_user_function($controller->execute, $this->request);
-            //echo call_user_func($this->{$this->request->request_method}[$this->request->request_uri], $this->request);
         }
     }
 

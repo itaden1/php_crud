@@ -1,10 +1,13 @@
 <?php
 
-class HomePage{
+include_once("interface/IController.php");
+
+class BaseController implements IController
+{
+    var $request;
     function __construct($request)
     {
         $this->request = $request;
-        echo $request->request_method;
     }
     function __call($method, $args)
     {
@@ -19,13 +22,7 @@ class HomePage{
     }
     function get()
     {
-        $title = "Home";
-        $content = "yabba dabba doo";
-        //return homeView();
-        echo "running homepage function";
-        include "views/home.php";
-    
-    
+        pass;
     }
 }
 

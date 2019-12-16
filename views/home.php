@@ -1,3 +1,3 @@
-<h1>sss<?php $title ?></h1>
-<p><?php $content ?></p>
+<h1><?php echo $title ?></h1>
+<p><?php echo $content ?></p>
 
