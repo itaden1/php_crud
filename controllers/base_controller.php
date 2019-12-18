@@ -9,7 +9,7 @@ class BaseController implements IController
     {
         $this->request = $request;
     }
-    function __call($method, $args)
+    function handleHTTPMethods()
     {
         if ($this->request->request_method == "get")
         {
@@ -20,10 +20,10 @@ class BaseController implements IController
             echo "method ".$this->request->request_method. " not allowed";
         }
     }
-    function get()
-    {
-        pass;
-    }
+    function get(){}
+    function post(){}
+    function put(){}
+    function delete(){}
 }
 
 

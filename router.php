@@ -8,25 +8,26 @@ class Router
         $this->request = $request;
     }
     
-    function __call($method, $args)
+    function register($route, $controller)
     {
-        list($route, $callback) = $args;
-        $this->{$method}[$route] = $callback;
+        $this->{$route} = $controller;
     }
 
     function resolve()
     {
- 
-        if (!isset($this->{$this->request->request_method}[$this->request->request_uri]))
+        $method = $this->request->request_method;
+        $uri = $this->request->request_uri;
+        
+        // Check we have a controller for the request url
+        if (!isset($this->{$uri}))
         {
             echo "<h1>404</h1><br><h5>".$this->request->request_uri." not found</h5>";
         }
         else
         {
-            $method = $this->request->request_method;
-            $uri = $this->request->request_uri;
-            $controller = $this->{$method}[$uri];//($this->request);
-            $controller->do_something();
+            // call the controller
+            $controller = $this->{$uri};
+            $controller->handleHTTPMethods();
         }
     }
 

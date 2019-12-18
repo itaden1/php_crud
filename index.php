@@ -10,8 +10,8 @@ include_once("controllers/stuff_controller.php");
 $request = new Request();
 $router = new Router($request);
 
-$router->get("/", new HomeController($request));
-$router->get("/stuff", new StuffController($request));
+$router->register("/", new HomeController($request));
+$router->register("/stuff", new StuffController($request));
 
 
 ?>

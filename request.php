@@ -12,9 +12,7 @@ class Request
             $this->$key = strtolower($val);
             //echo $this->$key."<br>";
         }
-        //echo $this->{"request_uri"};
     }
-
 }
 
 ?>
