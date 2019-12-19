@@ -27,7 +27,7 @@ class Router
         {
             // call the controller
             $controller = $this->{$uri};
-            $controller->handleHTTPMethods();
+            $controller->handleHTTPMethods($this->request);
         }
     }
 

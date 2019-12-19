@@ -10,6 +10,8 @@ class Request
             $key = strtolower($key);
             //echo $key. "<br>";
             $this->$key = strtolower($val);
+            //echo $key.":".$this->$key."<br>";
+
             //echo $this->$key."<br>";
         }
     }

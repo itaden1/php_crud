@@ -1,6 +1,6 @@
 <?php
 
-include_once("/framework/base_controller.php");
+include_once(ROOT_PATH."/framework/controllers/base_controller.php");
 
 class StuffController extends BaseController
 {

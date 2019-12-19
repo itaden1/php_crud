@@ -1,26 +1,26 @@
 <?php
 
-include_once("../../framework/base_controller.php");
-
+include_once (ROOT_PATH."/framework/controllers/base_controller.php");
+include_once (VIEW_PATH."/home_view.php");
+$view = new HomeView();
+$view->render();
 class HomeController extends BaseController
 {
+
+    function __construct()
+    {
+        $this->view = new HomeView();
+    }
     function get()
     {
         $title = "Home";
         $content = "yabba dabba doo";
+
         $data = array(
-            "title" => &$title,
-            "content" => &$content
+            "title" => $title,
+            "content" => $content
         );
-        $output = NULL;
-        if (file_exists("views/home.php"))
-        {
-            extract($data);
-            ob_start();
-            include "views/home.php";
-            $output = ob_get_clean();
-        }
-        echo $output;
+        $this->view->render($data);
     }
 }
 ?>
