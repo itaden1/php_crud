@@ -1,11 +1,12 @@
 <?php
-echo "hello world<br>";
 // create a request object
-include_once ("request.php");
-include_once ("router.php");
+include_once ("framework/request.php");
+include_once ("framework/router.php");
 
-include_once("controllers/home_controller.php");
-include_once("controllers/stuff_controller.php");
+include_once ("application/controllers/home_controller.php");
+include_once ("application/controllers/stuff_controller.php");
+
+$BASE_URL = '/';
 
 $request = new Request();
 $router = new Router($request);

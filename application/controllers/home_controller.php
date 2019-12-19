@@ -1,6 +1,6 @@
 <?php
 
-include_once("base_controller.php");
+include_once("../../framework/base_controller.php");
 
 class HomeController extends BaseController
 {
@@ -23,6 +23,4 @@ class HomeController extends BaseController
         echo $output;
     }
 }
-
-
 ?>

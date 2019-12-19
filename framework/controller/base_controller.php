@@ -1,6 +1,6 @@
 <?php
 
-include_once("interface/IController.php");
+include_once("../interface/IController.php");
 
 class BaseController implements IController
 {
@@ -25,6 +25,4 @@ class BaseController implements IController
     function put(){}
     function delete(){}
 }
-
-
 ?>
