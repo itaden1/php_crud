@@ -1,2 +1,7 @@
-<h1><?php echo $data["title"] ?></h1>
+<?php
+include_once "header.php";
+?>
 <p><?php echo $data["content"] ?></p>
+<?php
+include_once "footer.php";
+?>

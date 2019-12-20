@@ -4,6 +4,11 @@ define("TEMPLATE_PATH", __DIR__."/application/templates/");
 define("VIEW_PATH", __DIR__."/application/views/");
 define("CONTROLLER_PATH", __DIR__."/application/controllers/");
 define("MODEL_PATH", __DIR__."/application/models/");
+
+define("STATIC_PATH", "/application/static/");
+define("CSS_PATH", STATIC_PATH."css/");
+
+
 // create a request object
 include_once ("framework/request.php");
 include_once ("framework/router.php");

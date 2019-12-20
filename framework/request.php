@@ -8,11 +8,7 @@ class Request
         {
             // TODO clean request input
             $key = strtolower($key);
-            //echo $key. "<br>";
-            $this->$key = strtolower($val);
-            //echo $key.":".$this->$key."<br>";
-
-            //echo $this->$key."<br>";
+            $this->$key = $val;
         }
     }
 }

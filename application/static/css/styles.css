@@ -1,0 +1,18 @@
+/* Pallete
+#c4a865
+#0b3042
+#eadebf
+#7f9eb3
+#546786
+*/
+
+body{
+    padding:0 !important;
+    margin:0 !important;
+}
+.header{
+    overflow: auto;
+    display:block;
+    background-color:#546786;
+    color :#fff;
+}

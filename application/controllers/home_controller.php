@@ -2,8 +2,7 @@
 
 include_once (ROOT_PATH."/framework/controllers/base_controller.php");
 include_once (VIEW_PATH."/home_view.php");
-$view = new HomeView();
-$view->render();
+
 class HomeController extends BaseController
 {
 
@@ -20,7 +19,7 @@ class HomeController extends BaseController
             "title" => $title,
             "content" => $content
         );
-        $this->view->render($data);
+        $this->view::render($data);
     }
 }
 ?>

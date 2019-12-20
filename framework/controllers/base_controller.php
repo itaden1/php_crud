@@ -6,7 +6,7 @@ class BaseController implements IController
 {
     function handleHTTPMethods($request)
     {
-        if ($request->request_method === "get")
+        if ($request->request_method === "GET")
         {
             $this->get();
         }
