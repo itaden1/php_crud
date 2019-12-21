@@ -1,17 +1,21 @@
 <?php
 class BaseModel
 {
+    function __construct()
+    {
+        $this->connection = $this->connect();
+    }
     function connect()
     {
-        $dsn = "mysql:host=localhost;dbname=mydb";
-        $user = "user123";
-        $pass = "pass123";
+        $dsn = "mysql:host=127.0.0.1;dbname=db";
+        $user = "user";
+        $pass = "password";
         $pdo = new PDO($dsn, $user, $pass);
         return $pdo;
     }
     function __destruct()
     {
-        $pdo = null;
+        $this->connection = null;
     }
 }
 
