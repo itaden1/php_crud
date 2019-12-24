@@ -15,11 +15,11 @@ class HomeController extends BaseController
     function get()
     {
         $title = "Home";
-        $speakers = $this->model->get_all();
+        $events = $this->model->get_all();
 
         $data = array(
             "title" => $title,
-            "speakers" => $speakers
+            "events" => $events
         );
         $this->view::render($data);
     }

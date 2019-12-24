@@ -12,6 +12,10 @@
 <body>
 <header class="header">
     <div class="container">
-        <h1><?php echo $data["title"] ?>
+        <h1><?php echo $data["title"] ?></h1>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/speakers">Speakers</a>
+        </nav>
     </div>
 </header>

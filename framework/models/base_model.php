@@ -10,7 +10,10 @@ class BaseModel
         $dsn = "mysql:host=127.0.0.1;dbname=db";
         $user = "user";
         $pass = "password";
-        $pdo = new PDO($dsn, $user, $pass);
+        $options = Array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+        );
+        $pdo = new PDO($dsn, $user, $pass, $options);
         return $pdo;
     }
     function __destruct()

@@ -15,4 +15,9 @@ body{
     display:block;
     background-color:#546786;
     color :#fff;
+    margin-bottom:20px;
+}
+
+.nav a{
+    padding-right:10px;
 }

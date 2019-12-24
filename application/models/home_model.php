@@ -6,7 +6,7 @@ class HomeModel extends BaseModel
 {
     function get_all()
     {
-        $query = $this->connection->query("SELECT * FROM speaker");
+        $query = $this->connection->query("SELECT * FROM event");
         return $query->fetchAll();
     }
 }
