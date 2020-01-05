@@ -16,7 +16,7 @@ class Router
     function resolve()
     {
         $method = $this->request->request_method;
-        $uri = $this->request->request_uri;
+        $uri = strtok($this->request->request_uri, '?');
         
         // Check we have a controller for the request url
         if (!isset($this->{$uri}))

@@ -1,4 +1,9 @@
 <?php
+require "vendor/autoload.php";
+//use Dotenv\Dotenv;
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 define("ROOT_PATH", __DIR__);
 define("TEMPLATE_PATH", __DIR__."/application/templates/");
 define("VIEW_PATH", __DIR__."/application/views/");
@@ -8,19 +13,29 @@ define("MODEL_PATH", __DIR__."/application/models/");
 define("STATIC_PATH", "/application/static/");
 define("CSS_PATH", STATIC_PATH."css/");
 
+// Auth0 
+use Auth0\SDK\Auth0;
+$auth0 = new Auth0([
+    "domain" => getenv("AUTH0_DOMAIN"),
+    "client_id" => getenv("AUTH0_CLIENT_ID"),
+    "client_secret" => getenv("AUTH0_CLIENT_SECRET"),
+    "redirect_uri" => "http://localhost:3000",
+    "scope" => "openid profile email"
+]);
 
-// create a request object
 include_once ("framework/request.php");
 include_once ("framework/router.php");
 
 include_once (CONTROLLER_PATH."/home_controller.php");
-include_once (CONTROLLER_PATH."/stuff_controller.php");
+include_once (CONTROLLER_PATH."/login_controller.php");
+include_once (CONTROLLER_PATH."/logout_controller.php");
 
+// create a request object
 $request = new Request();
 $router = new Router($request);
 
-$router->register("/", new HomeController());
-$router->register("/stuff", new StuffController());
-
+$router->register("/", new HomeController($auth0));
+$router->register("/login", new LoginController($auth0));
+$router->register("/logout", new LogoutController($auth0));
 
 ?>
