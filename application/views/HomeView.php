@@ -1,7 +1,7 @@
 <?php
 class HomeView
 {
-    function render($data)
+    function render_html($data)
     {
         $output = NULL;
 
@@ -13,6 +13,15 @@ class HomeView
             $output = ob_get_clean();
         }
         echo $output;
+    }
+    function render_json($data)
+    {
+        $read = array();
+        foreach($data->fetchAll() as $k => $row)
+        {
+            array_push($read, $row);
+        }
+        echo json_encode($read);
     }
 }
 ?>

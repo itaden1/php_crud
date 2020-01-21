@@ -22,13 +22,11 @@ $auth0 = new Auth0([
     "redirect_uri" => "http://localhost:3000",
     "scope" => "openid profile email"
 ]);
+include_once("framework/autoloader.php");
 
-include_once ("framework/request.php");
-include_once ("framework/router.php");
-
-include_once (CONTROLLER_PATH."/home_controller.php");
-include_once (CONTROLLER_PATH."/login_controller.php");
-include_once (CONTROLLER_PATH."/logout_controller.php");
+include_once (CONTROLLER_PATH."/HomeController.php");
+include_once (CONTROLLER_PATH."/LoginController.php");
+include_once (CONTROLLER_PATH."/LogoutController.php");
 
 // create a request object
 $request = new Request();

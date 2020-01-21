@@ -11,5 +11,4 @@ class HomeModel extends BaseModel
     }
 }
 
-
 ?>

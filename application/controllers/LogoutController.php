@@ -1,5 +1,5 @@
 <?php
-include_once (ROOT_PATH."/framework/controllers/base_controller.php");
+include_once (ROOT_PATH."/framework/controllers/BaseController.php");
 
 class LogoutController extends BaseController
 {

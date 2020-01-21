@@ -1,6 +1,9 @@
 <?php
+
 class BaseModel
 {
+    protected $connection;
+
     function __construct()
     {
         $this->connection = $this->connect();
@@ -16,6 +19,17 @@ class BaseModel
         $pdo = new PDO($dsn, $user, $pass, $options);
         return $pdo;
     }
+    function create(){}
+    function read()
+    {
+        $query = "SELECT * FROM " . $this->table_name . ";";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();
+        return $stmt;
+
+    }
+    function update(){}
+    function delete(){}
     function __destruct()
     {
         $this->connection = null;
