@@ -20,12 +20,12 @@ class HomeController extends BaseController
         $title = "Home";
         $events = $this->model->read();
 
-        $data = array(
-            "user" => $user,
-            "title" => $title,
-            "events" => $events
-        );
-        $this->view->render_json($events);
+        $read = array();
+        foreach($events->fetchAll(PDO::FETCH_ASSOC) as $k => $row)
+        {
+            array_push($read, $k = $row);
+        }
+        $this->view->render_json($read);
     }
 }
 ?>

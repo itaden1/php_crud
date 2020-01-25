@@ -40,8 +40,8 @@ include_once (CONTROLLER_PATH."/LogoutController.php");
 $request = new Request();
 $router = new Router($request);
 
-// $router->register("/", new HomeController($auth0));
-// $router->register("/login", new LoginController($auth0));
-// $router->register("/logout", new LogoutController($auth0));
+$router->register("/", new HomeController($auth0));
+$router->register("/login", new LoginController($auth0));
+$router->register("/logout", new LogoutController($auth0));
 
 ?>

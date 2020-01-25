@@ -1,7 +1,8 @@
 <?php
 class Router
 {
-    var $request;
+    private $request;
+    private $file_extensions = Array("jpg", "png", "svg","pdf");
 
     function __construct($request)
     {
@@ -19,6 +20,12 @@ class Router
         $method = $this->request->request_method;
         $uri = strtok($this->request->request_uri, '?');
         
+        // $extension = pathinfo($uri);
+        // if (in_array($extension, $this->file_extensions))
+        // {
+        //     echo $uri . "cha cha";
+        // }
+
         // Check we have a controller for the request url
         if (!isset($this->{$uri}))
         {

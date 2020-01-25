@@ -25,7 +25,11 @@ class BaseView implements IView
         
         echo $output;
     }
-    function render_json($data){}
+    function render_json($data=Null)
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
+    }
     function render_xml($data){}
 }
 ?>

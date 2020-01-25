@@ -1,5 +1,5 @@
 <?php
-class HomeView
+class HomeView extends BaseView
 {
     function __construct()
     {
@@ -17,15 +17,6 @@ class HomeView
             $output = ob_get_clean();
         }
         echo $output;
-    }
-    function render_json($data)
-    {
-        $read = array();
-        foreach($data->fetchAll() as $k => $row)
-        {
-            array_push($read, $row);
-        }
-        echo json_encode($read);
     }
 }
 ?>
