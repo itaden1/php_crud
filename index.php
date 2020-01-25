@@ -1,8 +1,16 @@
 <?php
+
 require "vendor/autoload.php";
-//use Dotenv\Dotenv;
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
+
+if (getenv("SERVER_ENV") == "development")
+{
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
 
 define("ROOT_PATH", __DIR__);
 define("TEMPLATE_PATH", __DIR__."/application/templates/");
@@ -32,8 +40,8 @@ include_once (CONTROLLER_PATH."/LogoutController.php");
 $request = new Request();
 $router = new Router($request);
 
-$router->register("/", new HomeController($auth0));
-$router->register("/login", new LoginController($auth0));
-$router->register("/logout", new LogoutController($auth0));
+// $router->register("/", new HomeController($auth0));
+// $router->register("/login", new LoginController($auth0));
+// $router->register("/logout", new LogoutController($auth0));
 
 ?>

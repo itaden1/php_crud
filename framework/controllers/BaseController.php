@@ -1,12 +1,14 @@
 <?php
 
-include_once(ROOT_PATH."/framework/interface/IController.php");
-
 class BaseController implements IController
 {
-    function __construct($auth0)
+    private $view;
+    private $model;
+
+    function __construct()
     {
-        $this->auth = $auth0;
+        $this->model = new BaseModel();
+        $this->view = new BaseView();
     }
     function handleHTTPMethods($request)
     {
@@ -19,7 +21,9 @@ class BaseController implements IController
             echo "method ".$request->request_method. " not allowed";
         }
     }
-    function get(){}
+    function get(){
+        $this->view->render_html();
+    }
     function post(){}
     function put(){}
     function delete(){}

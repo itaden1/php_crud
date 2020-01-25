@@ -6,6 +6,7 @@ class Router
     function __construct($request)
     {
         $this->request = $request;
+        $this->{'/'} = new BaseController();
     }
     
     function register($route, $controller)

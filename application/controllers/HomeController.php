@@ -9,7 +9,8 @@ class HomeController extends BaseController
 
     function __construct($auth0)
     {
-        BaseController::__construct($auth0);
+        BaseController::__construct();
+        $this->auth = $auth0;
         $this->view = new HomeView();
         $this->model = new EventModel();
     }
@@ -24,7 +25,7 @@ class HomeController extends BaseController
             "title" => $title,
             "events" => $events
         );
-        $this->view::render_json($events);
+        $this->view->render_json($events);
     }
 }
 ?>
