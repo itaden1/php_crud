@@ -17,13 +17,8 @@ class HomeController extends BaseController
         $events = $this->model->read_list();
 
         $data = array();
-        $data["title"] = "Home";
-        $data["events"] = Array();
-
-        foreach($events->fetchAll(PDO::FETCH_ASSOC) as $k => $row)
-        {
-            array_push($data["events"], $k = $row);
-        }
+        $data["title"] = $this->model->getTableName();
+        $data["events"] = $this->model->getQueryResults();
 
         $this->view->render($data);
     }

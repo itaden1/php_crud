@@ -3,6 +3,7 @@ class Router
 {
     private $request;
     private $file_extensions = Array("jpg", "png", "svg","pdf");
+    private $routeID = FALSE;
 
     function __construct($request)
     {
@@ -12,6 +13,11 @@ class Router
     
     function register($route, $controller)
     {
+        if (basename($route) === "{id}")
+        {
+            $this->routID = TRUE;
+            //$route = strtok($route, "{id}");
+        }
         $this->{$route} = $controller;
     }
 
@@ -19,6 +25,13 @@ class Router
     {
         $method = $this->request->request_method;
         $uri = strtok($this->request->request_uri, '?');
+
+        if ($this->routID === TRUE)
+        {
+            $id = basename($uri);
+        }
+        echo $uri;
+
         
         // $extension = pathinfo($uri);
         // if (in_array($extension, $this->file_extensions))

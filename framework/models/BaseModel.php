@@ -3,6 +3,7 @@
 class BaseModel
 {
     protected $connection;
+    protected $resultQuery = Array();
 
     function __construct()
     {
@@ -17,14 +18,25 @@ class BaseModel
         $pdo = new PDO($dsn, $user, $pass, $options);
         return $pdo;
     }
+    function getTableName()
+    {
+        return $this->tableName;
+    }
+    function getQueryResults()
+    {
+        return $this->resultQuery;
+    }
     function create(){}
     function read_list()
     {
-        $query = "SELECT * FROM " . $this->table_name . ";";
+        // Return a list of records from the table
+        $query = "SELECT * FROM " . $this->tableName . ";";
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
-        return $stmt;
-
+        foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $k => $row)
+        {
+            $this->resultQuery[$k] = $row;
+        }
     }
     function read_one($id){}
     function update(){}

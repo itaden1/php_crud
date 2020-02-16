@@ -2,7 +2,7 @@
 
 class EventModel extends BaseModel implements IModel
 {
-    protected $table_name = "event";
+    protected $tableName = "event";
 
     public $id;
 	public $name;

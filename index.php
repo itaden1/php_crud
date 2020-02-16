@@ -55,7 +55,7 @@ $request = new Request();
 $router = new Router($request);
 
 $router->register("/", new HomeController());
-$router->register("/api", new HomeAPIController());
+$router->register("api/{id}", new HomeAPIController());
 // $router->register("/login", new LoginController());
 // $router->register("/logout", new LogoutController());
 
