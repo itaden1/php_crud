@@ -1,12 +1,7 @@
-USING db;
-DROP TABLE IF EXISTS event;
-DROP TABLE IF EXISTS speaker;
-DROP TABLE IF EXISTS timeslot_activity;
 
-DROP TABLE IF EXISTS `group`;
-DROP TABLE IF EXISTS group_member;
-DROP TABLE IF EXISTS institution;
-DROP TABLE IF EXISTS timeslot;
+DROP DATABASE db;
+CREATE DATABASE db;
+USE db;
 
 CREATE TABLE institution (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -79,7 +74,6 @@ CREATE TABLE group_member (
 ); 
 
 
-
 INSERT INTO institution
 	(name, address)
 	VALUES
@@ -90,7 +84,10 @@ INSERT INTO institution
 INSERT INTO event
 	(name, institution, location_long, location_lat, blurb)
 	VALUES
-	('Epic Time', (SELECT id FROM institution WHERE name = 'ICMS'), -33.86514, 151.20990, "Coolest festivus");
+	('Epic Time', (SELECT id FROM institution WHERE name = 'ICMS'), -33.86514, 151.20990, "Coolest festivus")
+	('Another event', (SELECT id FROM institution WHERE name = 'Open Colleges'), -33.86514, 151.20990, "Information session")
+	('Stuff', (SELECT id FROM institution WHERE name = 'ICMS'), -33.86514, 151.20990, "Coolest festivus");
+
 
 INSERT INTO person
 	(first_name, last_name, title, biography, institution, photo)

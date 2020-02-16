@@ -7,9 +7,9 @@ class BaseController implements IController
 
     function __construct()
     {
-        $this->model = new BaseModel();
-        $this->view = new BaseView();
+        $this->view = new Baseview($renderer="HTMLRenderer");
     }
+
     function handleHTTPMethods($request)
     {
         if ($request->request_method === "GET")
@@ -22,7 +22,7 @@ class BaseController implements IController
         }
     }
     function get(){
-        $this->view->render_html();
+        $this->view->render($data=NULL);
     }
     function post(){}
     function put(){}

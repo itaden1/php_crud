@@ -21,27 +21,42 @@ define("MODEL_PATH", __DIR__."/application/models/");
 define("STATIC_PATH", "/application/static/");
 define("CSS_PATH", STATIC_PATH."css/");
 
+
+define("DATABASE", Array(
+    "db_engine" => "mysql",
+    "host" => "127.0.0.1",
+    "dbname" => "db",
+    "user" => getenv("DB_USER"),
+    "pass" => getenv("DB_PASSWORD"),
+    "options" => Array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+        )
+    )
+);
+
 // Auth0 
-use Auth0\SDK\Auth0;
-$auth0 = new Auth0([
-    "domain" => getenv("AUTH0_DOMAIN"),
-    "client_id" => getenv("AUTH0_CLIENT_ID"),
-    "client_secret" => getenv("AUTH0_CLIENT_SECRET"),
-    "redirect_uri" => "http://localhost:3000",
-    "scope" => "openid profile email"
-]);
+// use Auth0\SDK\Auth0;
+// $auth0 = new Auth0([
+//     "domain" => getenv("AUTH0_DOMAIN"),
+//     "client_id" => getenv("AUTH0_CLIENT_ID"),
+//     "client_secret" => getenv("AUTH0_CLIENT_SECRET"),
+//     "redirect_uri" => "http://localhost:3000",
+//     "scope" => "openid profile email"
+// ]);
+
 include_once("framework/autoloader.php");
 
 include_once (CONTROLLER_PATH."/HomeController.php");
-include_once (CONTROLLER_PATH."/LoginController.php");
-include_once (CONTROLLER_PATH."/LogoutController.php");
+include_once (CONTROLLER_PATH."/HomeAPIController.php");
+
 
 // create a request object
 $request = new Request();
 $router = new Router($request);
 
-$router->register("/", new HomeController($auth0));
-$router->register("/login", new LoginController($auth0));
-$router->register("/logout", new LogoutController($auth0));
+$router->register("/", new HomeController());
+$router->register("/api", new HomeAPIController());
+// $router->register("/login", new LoginController());
+// $router->register("/logout", new LogoutController());
 
 ?>

@@ -10,17 +10,15 @@ class BaseModel
     }
     function connect()
     {
-        $dsn = "mysql:host=127.0.0.1;dbname=db";
-        $user = "user";
-        $pass = "password";
-        $options = Array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-        );
+        $dsn = DATABASE["db_engine"].":host=".DATABASE["host"].";dbname=".DATABASE["dbname"];
+        $user = DATABASE["user"];
+        $pass = DATABASE["pass"];
+        $options = DATABASE["options"];
         $pdo = new PDO($dsn, $user, $pass, $options);
         return $pdo;
     }
     function create(){}
-    function read()
+    function read_list()
     {
         $query = "SELECT * FROM " . $this->table_name . ";";
         $stmt = $this->connection->prepare($query);
@@ -28,6 +26,7 @@ class BaseModel
         return $stmt;
 
     }
+    function read_one($id){}
     function update(){}
     function delete(){}
     function __destruct()

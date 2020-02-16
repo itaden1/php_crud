@@ -15,15 +15,7 @@
         <h1><?php echo $data["title"] ?></h1>
         <nav class="nav">
             <a href="/">Home</a>
-            <a href="/speakers">Speakers</a>
-            <div class=pull-right>
-            <?php if ($user){ ?>
-                <a href=""><?php $user["name"] ?></a>
-                <a href="logout">logout</a>
-            <?php }else { ?>
-                <a href="login">Login</a>
-            <?php } ?>
-            </div>
+            <a href="/api">API</a>
         </nav>
 
     </div>

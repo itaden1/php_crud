@@ -7,25 +7,25 @@ include_once (VIEW_PATH."/HomeView.php");
 class HomeController extends BaseController
 {
 
-    function __construct($auth0)
+    function __construct()
     {
-        BaseController::__construct();
-        $this->auth = $auth0;
-        $this->view = new HomeView();
+        $this->view = new HomeView($renderer="HTMLRenderer", $template=TEMPLATE_PATH."/home_template.php");
         $this->model = new EventModel();
     }
     function get()
     {
-        $user = $this->auth->getUser();
-        $title = "Home";
-        $events = $this->model->read();
+        $events = $this->model->read_list();
 
-        $read = array();
+        $data = array();
+        $data["title"] = "Home";
+        $data["events"] = Array();
+
         foreach($events->fetchAll(PDO::FETCH_ASSOC) as $k => $row)
         {
-            array_push($read, $k = $row);
+            array_push($data["events"], $k = $row);
         }
-        $this->view->render_json($read);
+
+        $this->view->render($data);
     }
 }
 ?>

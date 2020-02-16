@@ -1,35 +1,32 @@
 <?php
 
+// Base view for displaying data
+// The BaseView can be used in most circumstances as its render functionality is established by using dependency injection
+// requires a renderer (HTMLRenderer, JSONRenderer) to be injected
+// when using an HTMLRenderer a template is required
 
 class BaseView implements IView
 {
-    private $template;
-    function __construct()
+    public $renderer;
+    public $template;
+
+    function __construct($renderer, $template=NULL)
     {
-        $this->template = __DIR__ . "/base_template.php";
-    }
-    function render_html($data=Null)
-    {
-   
-        $output = NULL;
-        if (file_exists($this->template))
+        // set up renderer and template
+        if(!$template)
         {
-            ob_start();
-            if ($data != Null)
-            {
-                extract($data);
-            }
-            include ($this->template);
-            $output = ob_get_clean();
+            $this->template = ROOT_PATH."/framework/views/base_template.php";
         }
-        
-        echo $output;
+        else
+        {
+            $this->template = $template;
+        }
+    
+        $this->renderer = new $renderer($this->template);
     }
-    function render_json($data=Null)
+    function render($data)
     {
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($data);
+       echo $this->renderer->render($data);
     }
-    function render_xml($data){}
 }
 ?>
