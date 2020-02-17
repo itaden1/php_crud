@@ -10,11 +10,11 @@ class BaseController implements IController
         $this->view = new Baseview($renderer="HTMLRenderer");
     }
 
-    function handleHTTPMethods($request)
+    function handleHTTPMethods($request, $id=NULL)
     {
         if ($request->request_method === "GET")
         {
-            $this->get();
+            $this->get($id);
         }
         else
         {

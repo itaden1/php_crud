@@ -78,14 +78,14 @@ INSERT INTO institution
 	(name, address)
 	VALUES
 	('ICMS', '123 George St, Sydney'),
-	('Open Colleges', 'Victoria Rd, Surry Hills')
+	('Open Colleges', 'Victoria Rd, Surry Hills'),
 	('Douugh', 'Tank Stream Labs');
 
 INSERT INTO event
 	(name, institution, location_long, location_lat, blurb)
 	VALUES
-	('Epic Time', (SELECT id FROM institution WHERE name = 'ICMS'), -33.86514, 151.20990, "Coolest festivus")
-	('Another event', (SELECT id FROM institution WHERE name = 'Open Colleges'), -33.86514, 151.20990, "Information session")
+	('Epic Time', (SELECT id FROM institution WHERE name = 'ICMS'), -33.86514, 151.20990, "Coolest festivus"),
+	('Another event', (SELECT id FROM institution WHERE name = 'Open Colleges'), -33.86514, 151.20990, "Information session"),
 	('Stuff', (SELECT id FROM institution WHERE name = 'ICMS'), -33.86514, 151.20990, "Coolest festivus");
 
 
@@ -93,7 +93,7 @@ INSERT INTO person
 	(first_name, last_name, title, biography, institution, photo)
 	VALUES
 	('Gregg', 'Olde', 'manager', NULL, (SELECT id FROM institution WHERE name = 'ICMS'), 'https://picsum.photos/200'),
-	('Matt', 'Hill', 'Manager', NULL, (SELECT id FROM institution WHERE name = 'Open Colleges'), 'https://picsum.photos/200')
+	('Matt', 'Hill', 'Manager', NULL, (SELECT id FROM institution WHERE name = 'Open Colleges'), 'https://picsum.photos/200'),
 	('Tom', 'Guy', 'Senior Software Engineer', NULL, (SELECT id FROM institution WHERE name = 'Douugh'), 'https://picsum.photos/200');
 
 
@@ -107,6 +107,7 @@ INSERT INTO group_member
 	((SELECT id FROM `group` WHERE name = 'Rum Punch'),  (SELECT id FROM person WHERE first_name = 'Matt'));
 
 
+SELECT * FROM event;
 SELECT * FROM person;
 SELECT * FROM `group`
 	INNER JOIN group_member ON `group`.id = group_member.group_id

@@ -27,18 +27,18 @@ class BaseModel
         return $this->resultQuery;
     }
     function create(){}
-    function read_list()
+    function read($id)
     {
         // Return a list of records from the table
-        $query = "SELECT * FROM " . $this->tableName . ";";
+        $q = ($id ? "WHERE id=:id;" : ";");
+        $query = "SELECT * FROM $this->tableName $q";
         $stmt = $this->connection->prepare($query);
-        $stmt->execute();
+        $stmt->execute(["id" => $id]);
         foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $k => $row)
         {
             $this->resultQuery[$k] = $row;
         }
     }
-    function read_one($id){}
     function update(){}
     function delete(){}
     function __destruct()

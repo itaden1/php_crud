@@ -3,7 +3,7 @@ class Router
 {
     private $request;
     private $file_extensions = Array("jpg", "png", "svg","pdf");
-    private $routeID = FALSE;
+    public $routes = Array();
 
     function __construct($request)
     {
@@ -13,24 +13,28 @@ class Router
     
     function register($route, $controller)
     {
-        if (basename($route) === "{id}")
-        {
-            $this->routID = TRUE;
-            //$route = strtok($route, "{id}");
-        }
-        $this->{$route} = $controller;
+        $this->routes[$route] = $controller;
     }
 
     function resolve()
     {
+        foreach($this->routes as $k => $route)
+        {
+            echo $k."<br>";
+        }
         $method = $this->request->request_method;
         $uri = strtok($this->request->request_uri, '?');
+        $id = NULL;
 
-        if ($this->routID === TRUE)
+        $routeID = strtok($uri, basename($uri)).":id/";
+
+        // check if a route with id exists
+        if (isset($this->routes[$routeID]))
         {
             $id = basename($uri);
+            $uri = strtok($uri, basename($uri)).":id/";
         }
-        echo $uri;
+
 
         
         // $extension = pathinfo($uri);
@@ -40,15 +44,15 @@ class Router
         // }
 
         // Check we have a controller for the request url
-        if (!isset($this->{$uri}))
+        if (!isset($this->routes[$uri]))
         {
             echo "<h1>404</h1><br><h5>".$this->request->request_uri." not found</h5>";
         }
         else
         {
             // call the controller
-            $controller = $this->{$uri};
-            $controller->handleHTTPMethods($this->request);
+            $controller = $this->routes[$uri];
+            $controller->handleHTTPMethods($this->request, $id);
         }
     }
 

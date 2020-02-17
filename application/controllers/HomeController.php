@@ -12,9 +12,9 @@ class HomeController extends BaseController
         $this->view = new HomeView($renderer="HTMLRenderer", $template=TEMPLATE_PATH."/home_template.php");
         $this->model = new EventModel();
     }
-    function get()
+    function get($id=NULL)
     {
-        $events = $this->model->read_list();
+        $events = $this->model->read($id);
 
         $data = array();
         $data["title"] = $this->model->getTableName();
