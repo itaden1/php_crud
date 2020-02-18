@@ -54,8 +54,9 @@ include_once (CONTROLLER_PATH."/HomeAPIController.php");
 $request = new Request();
 $router = new Router($request);
 
-$router->register("/api/event/", new HomeAPIController());
-$router->register("/api/event/:id/", new HomeAPIController());
+$router->register("/api/event", new HomeAPIController());
+$router->register("/api/event/:id", new HomeAPIController());
+$router->register("/api/event/timetable", new BaseController());
 // $router->register("/login", new LoginController());
 // $router->register("/logout", new LogoutController());
 

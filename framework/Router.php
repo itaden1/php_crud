@@ -26,15 +26,19 @@ class Router
         $uri = strtok($this->request->request_uri, '?');
         $id = NULL;
 
-        $routeID = strtok($uri, basename($uri)).":id/";
+        // need to change strtok to not remove further characters from url
+        $routeID = strtok($uri, basename($uri)).":id";
+        echo "<h1>$routeID</h1>";
+        echo "<h1>".basename($uri)."</h1>";
+
 
         // check if a route with id exists
         if (isset($this->routes[$routeID]))
         {
             $id = basename($uri);
-            $uri = strtok($uri, basename($uri)).":id/";
-        }
+            $uri = $routeID;
 
+        }
 
         
         // $extension = pathinfo($uri);
