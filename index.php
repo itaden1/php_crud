@@ -1,6 +1,9 @@
 <?php
 
 require "vendor/autoload.php";
+require "framework/autoloader.php";
+
+$request = new Request();
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -44,19 +47,16 @@ define("DATABASE", Array(
 //     "scope" => "openid profile email"
 // ]);
 
-include_once("framework/autoloader.php");
 
 include_once (CONTROLLER_PATH."/HomeController.php");
-include_once (CONTROLLER_PATH."/HomeAPIController.php");
+include_once (CONTROLLER_PATH."/EventAPIController.php");
 
 
 // create a request object
-$request = new Request();
 $router = new Router($request);
 
-$router->register("/api/event", new HomeAPIController());
-$router->register("/api/event/:id", new HomeAPIController());
-$router->register("/api/event/timetable", new BaseController());
+//$router->register("", new BaseController($request));
+$router->register("/api/event/:id", new EventAPIController($request));
 // $router->register("/login", new LoginController());
 // $router->register("/logout", new LogoutController());
 

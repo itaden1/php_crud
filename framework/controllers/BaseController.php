@@ -4,27 +4,33 @@ class BaseController implements IController
 {
     private $view;
     private $model;
+    protected $request;
 
-    function __construct()
+    function __construct($request)
     {
-        $this->view = new Baseview($renderer="HTMLRenderer");
+        $this->request = $request;
+        $this->view = new Baseview($renderer=new HTMLRenderer(ROOT_PATH."/framework/views/base_template.php"));
     }
 
-    function handleHTTPMethods($request, $id=NULL)
+    function handleHTTPMethods($id=NULL)
     {
-        if ($request->request_method === "GET")
+        //echo var_dump($this);
+        if ($this->request->request_method === "GET")
         {
             $this->get($id);
         }
-        else
+        elseif($this->request->request_method === "POST")
         {
-            echo "method ".$request->request_method. " not allowed";
+            $this->post();
         }
     }
     function get(){
         $this->view->render($data=NULL);
     }
-    function post(){}
+    function post()
+    {
+        echo "method ". $this->request->request_method. " not allowed";
+    }
     function put(){}
     function delete(){}
 }

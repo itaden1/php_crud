@@ -7,7 +7,12 @@ class JSONRenderer implements IRenderer
     public function render($data)
     {
         header("Content-Type: application/json");
-        return json_encode($data);
+        $dict = Array();
+        foreach($data as $k => $v)
+        {
+            $dict[$k] = $v;
+        }
+        return json_encode($dict);
     }
 }
 ?>

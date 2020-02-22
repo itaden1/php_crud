@@ -10,6 +10,7 @@ class Request
             $key = strtolower($key);
             $this->$key = $val;
         }
+        $this->body = json_decode(file_get_contents('php://input'), true);
     }
 }
 

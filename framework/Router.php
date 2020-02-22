@@ -8,55 +8,57 @@ class Router
     function __construct($request)
     {
         $this->request = $request;
-        $this->{'/'} = new BaseController();
+        $this->{'/'} = new BaseController($request);
     }
     
     function register($route, $controller)
     {
         $this->routes[$route] = $controller;
+
+        // If an ID is specified on the route create a list route as well
+        if (basename($route) === ':id')
+        {
+            $this->routes[dirname($route)] = $controller;
+        }
     }
 
     function resolve()
     {
-        foreach($this->routes as $k => $route)
-        {
-            echo $k."<br>";
-        }
+
         $method = $this->request->request_method;
         $uri = strtok($this->request->request_uri, '?');
         $id = NULL;
 
-        // need to change strtok to not remove further characters from url
-        $routeID = strtok($uri, basename($uri)).":id";
-        echo "<h1>$routeID</h1>";
-        echo "<h1>".basename($uri)."</h1>";
-
+        $routeID = dirname($uri)."/:id";
 
         // check if a route with id exists
         if (isset($this->routes[$routeID]))
         {
-            $id = basename($uri);
-            $uri = $routeID;
+            if (is_numeric(basename($uri)))
+            {
+                $id = basename($uri);
+                $uri = $routeID;
+            } 
 
         }
 
-        
         // $extension = pathinfo($uri);
         // if (in_array($extension, $this->file_extensions))
         // {
         //     echo $uri . "cha cha";
         // }
-
+        $uri = rtrim($uri, '/');
         // Check we have a controller for the request url
-        if (!isset($this->routes[$uri]))
-        {
-            echo "<h1>404</h1><br><h5>".$this->request->request_uri." not found</h5>";
-        }
-        else
+
+        if (isset($this->routes[$uri]))
         {
             // call the controller
             $controller = $this->routes[$uri];
-            $controller->handleHTTPMethods($this->request, $id);
+            $controller->handleHTTPMethods($id);
+        }
+        else
+        {
+            echo "<h1>404</h1><br><h5>".$this->request->request_uri." not found</h5>";
         }
     }
 

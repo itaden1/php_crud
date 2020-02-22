@@ -10,7 +10,7 @@ class BaseView implements IView
     public $renderer;
     public $template;
 
-    function __construct($renderer, $template=NULL)
+    function __construct(IRenderer $renderer, $template=NULL)
     {
         // set up renderer and template
         if(!$template)
