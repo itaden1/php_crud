@@ -21,13 +21,12 @@ define("VIEW_PATH", __DIR__."/application/views/");
 define("CONTROLLER_PATH", __DIR__."/application/controllers/");
 define("MODEL_PATH", __DIR__."/application/models/");
 
-define("STATIC_PATH", "/application/static/");
-define("CSS_PATH", STATIC_PATH."css/");
-
+define("STATIC_PATH", "/static/");
+define("CSS_PATH", STATIC_PATH . "css/");
 
 define("DATABASE", Array(
     "db_engine" => "mysql",
-    "host" => "127.0.0.1",
+    "host" => getenv("DB_HOST"), //"0.0.0.0:3306",
     "dbname" => "db",
     "user" => getenv("DB_USER"),
     "pass" => getenv("DB_PASSWORD"),
@@ -55,7 +54,7 @@ include_once (CONTROLLER_PATH."/EventAPIController.php");
 // create a request object
 $router = new Router($request);
 
-//$router->register("", new BaseController($request));
+$router->register("", new BaseController($request));
 $router->register("/api/event/:id", new EventAPIController($request));
 // $router->register("/login", new LoginController());
 // $router->register("/logout", new LogoutController());

@@ -3,7 +3,7 @@
 class BaseModel
 {
     protected $connection;
-    protected $resultQuery = Array();
+    protected $result_query = Array();
 
     function __construct($connect=TRUE)
     {
@@ -18,7 +18,7 @@ class BaseModel
         $pdo = new PDO($dsn, $user, $pass, $options);
         return $pdo;
     }
-    function getTableName()
+    function get_table_name()
     {
         return $this->table_name;
     }
@@ -26,21 +26,38 @@ class BaseModel
     {
         foreach($data as $k => $v)
         {
-            if (property_exists($this, $k)) $this->{$k} = $v;
+            if (in_array($k, array_keys($this->columns))) $this->columns[$k] = $v;
         }
+
     }
-    function getQueryResults()
+    function get_query_results()
     {
         return $this->result_query;
     }
-    function create(){
-        $query = "INSERT INTO $this->table_name VALUES (";
-        foreach((array)$this as $k => $v)
+    function create($data){
+        // Populate the object with data
+        $this->populate_data($data, $set_pk=FALSE);
+
+        // Construct the query based on the objects column array
+        // First pass sets the column names
+        // Second pass appends placeholder parameters
+        $query = "INSERT INTO $this->table_name (";
+        foreach($this->columns as $k => $v)
         {
-            $query = $query . ":$v,";
+            if ($k != 'id') $query = $query . "$k, ";
         }
-        $query = $query . ");";
-        echo $query;
+        $query = rtrim($query, ", ").") VALUES (";
+        foreach($this->columns as $k => $v)
+        {
+            if ($k != 'id') $query = $query . ":$k, ";
+        }
+        $query = rtrim($query, ", ").");";
+        $stmt = $this->connection->prepare($query);
+
+        // create a copy of column data and remove primary key
+        $arr = $this->columns;
+        if (!$set_pk) unset($arr['id']);
+        $stmt->execute($arr);
     }
     function read($id)
     {

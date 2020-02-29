@@ -18,14 +18,15 @@ class EventAPIController extends BaseController
         $events = $this->model->read($id);
 
         $data = array();
-        $data["title"] = $this->model->getTableName();
-        $data["events"] = $this->model->getQueryResults();
+        $data["title"] = $this->model->get_table_name();
+        $data["events"] = $this->model->get_query_results();
 
         $this->view->render($data);
     }
     function post()
     {
-        echo $this->view->render($this->request->body);
+        $this->model->create($this->request->body);
+        $this->view->render(Array("message" => "created"));
     }
 }
 ?>

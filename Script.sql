@@ -108,6 +108,7 @@ INSERT INTO group_member
 
 
 SELECT * FROM event;
+DELETE FROM event WHERE name IS NULL;
 SELECT * FROM person;
 SELECT * FROM `group`
 	INNER JOIN group_member ON `group`.id = group_member.group_id

@@ -2,7 +2,9 @@
 class Router
 {
     private $request;
-    private $file_extensions = Array("jpg", "png", "svg","pdf");
+    private $img_extensions = Array("jpg", "png", "svg","pdf");
+    private $css_extension = "css";
+    private $js_extension = "js";
     public $routes = Array();
 
     function __construct($request)
@@ -42,11 +44,11 @@ class Router
 
         }
 
-        // $extension = pathinfo($uri);
-        // if (in_array($extension, $this->file_extensions))
-        // {
-        //     echo $uri . "cha cha";
-        // }
+        $extension = pathinfo($uri, PATHINFO_EXTENSION);
+        if (in_array($extension, $this->img_extensions))
+        {
+            echo $uri;
+        }
         $uri = rtrim($uri, '/');
         // Check we have a controller for the request url
 
